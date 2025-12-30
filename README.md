@@ -63,10 +63,12 @@ See [TRAINING_JOURNAL.md](TRAINING_JOURNAL.md) for detailed training analysis.
 ![Phase 3 Trading Analysis](phase3_analysis.png)
 
 **Key findings**:
-- **Equity curve** (top-left): Shows -$75 max drawdown early, then steady recovery. The agent didn't panic or collapse policy.
+- **Equity curve** (top-left): -$75 max drawdown early, then steady recovery. Policy didn't collapse under pressure.
 - **PnL by asset** (top-right): XRP carried (+$44), ETH struggled (-$45). Same policy, different results per asset.
+- **PnL by side** (top-right): UP bets (+$16) outperformed DOWN (-$7) despite similar win rates. Slight long bias works.
 - **Entry distribution** (bottom-left): Agent favors extreme probabilities (near 0 or 1) - hunting asymmetric payoffs.
-- **Binance vs PnL** (bottom-right): **Correlation: 0.001** - The edge isn't "follow Binance direction". The agent learned *when* to trade, not just *which way* Binance moved. By trade close, Binance information is already priced in. The alpha is in entry timing, not post-entry direction.
+- **Duration vs PnL** (bottom-middle): Correlation 0.02 - trade length doesn't predict outcome. Quick flips ≈ longer holds.
+- **Entry timing vs PnL** (bottom-right): Correlation 0.01 - early vs late entry in 15-min window doesn't matter. Agent reacts to market state, not time.
 
 ---
 
