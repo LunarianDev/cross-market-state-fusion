@@ -101,11 +101,17 @@ Critic: Linear(18, 128) -> tanh -> Linear(128, 128) -> tanh -> Linear(128, 1)
 
 ---
 
-## Run 1: Initial Training
+## Training Run
 
-**Date**: December 29, 2025, 19:08 - 20:00
+**Date**: December 29, 2025, 19:08 - ongoing
+**Total Updates**: 60 (36 + 24)
+**Total Trades**: 3,661+
+
+---
+
+### Phase 1: Shaped Rewards (Updates 1-36)
+
 **Duration**: ~52 minutes
-**Updates**: 36 PPO updates
 **Trades**: 1,545
 
 ### Configuration
@@ -259,18 +265,18 @@ np.savez("rl_model_stats.npz",
 
 ---
 
-## Run 2: Pure PnL Reward
+### Phase 2: Pure PnL Reward (Updates 37-60)
 
-**Date**: December 29, 2025, 20:02 - ongoing
-**Model**: Loaded weights from Run 1 (36 updates)
+**Started**: December 29, 2025, 20:02
+**Trades**: 2,116+
 
-### Configuration Changes
+#### Configuration Changes
 ```python
 entropy_coef = 0.10  # Doubled
 # Reward: pure realized PnL (no shaping)
 ```
 
-### Results (22 updates)
+#### Results (24 updates)
 
 | Update | Entropy | Value Loss | Avg Reward | PnL | Trades | Win Rate |
 |--------|---------|------------|------------|-----|--------|----------|
@@ -281,16 +287,17 @@ entropy_coef = 0.10  # Doubled
 | 19 | 1.07 | 60.04 | -0.14 | $6.18 | 1560 | 21.3% |
 | 20 | 1.05 | 3.10 | -0.01 | $5.85 | 1672 | 21.1% |
 | 22 | 1.02 | 8.44 | +0.08 | $8.13 | 1885 | 21.3% |
+| 24 | 1.03 | 2.57 | +0.05 | $8.50 | 2116 | 21.5% |
 
-### Observations
+#### Observations
 
 **1. Entropy Fully Recovered**
 ```
-Run 1 end:  entropy=0.36 (collapsed)
-Run 2 start: entropy=0.68 (loaded weights)
-Run 2 now:   entropy=1.06 (full exploration)
+Phase 1 end:   entropy=0.36 (collapsed)
+Phase 2 start: entropy=0.68 (loaded weights)
+Phase 2 now:   entropy=1.03 (full exploration)
 ```
-The higher entropy coefficient worked - entropy recovered from 0.36 to 1.06, reaching the theoretical maximum (~1.1 for 3 actions). The policy is now properly stochastic.
+The higher entropy coefficient worked - entropy recovered from 0.36 to 1.03, reaching the theoretical maximum (~1.1 for 3 actions). The policy is now properly stochastic.
 
 **2. Value Loss Spikes**
 

@@ -10,21 +10,24 @@ PPO agent trading 4 concurrent 15-minute binary prediction markets (BTC, ETH, SO
 
 ## Training Journal
 
-### Run 1: Initial Training (36 updates)
-- **Problem**: Entropy collapsed 1.09 → 0.36 (policy became deterministic)
-- **Cause**: Reward shaping dominated actual PnL signal
-- **Result**: $3.90 PnL, 1545 trades, 20% win rate
+### Current Run: 60 updates, 3,661+ trades
 
-### Run 2: Pure PnL Reward (ongoing)
-Switched to pure realized PnL reward, doubled entropy coefficient.
+**Phase 1: Shaped Rewards (Updates 1-36)**
+- Entropy collapsed 1.09 → 0.36 (policy became deterministic)
+- Cause: Reward shaping dominated actual PnL signal
+- Result: $3.90 PnL, 1545 trades, 20% win rate
 
-| Update | Entropy | PnL | Trades | Win Rate |
-|--------|---------|-----|--------|----------|
-| 1 | 0.68 | $5.20 | 27 | 33% |
-| 10 | 1.06 | $9.55 | 616 | 23% |
-| 22 | 1.02 | $8.13 | 1885 | 21% |
+**Phase 2: Pure PnL Reward (Updates 37-60)**
+- Switched to pure realized PnL reward, doubled entropy coefficient (0.05 → 0.10)
+- Entropy recovered to 1.03, model exploring properly
+- Result: $8.50 PnL, 2116 trades, 21.5% win rate
 
-**Key insight**: Entropy stable at 1.02-1.08, model exploring properly. PnL volatile but positive ($6-10 range). Win rate ~21% but profitable due to asymmetric payoffs.
+| Phase | Update | Entropy | PnL | Trades | Win Rate |
+|-------|--------|---------|-----|--------|----------|
+| 1 | 36 | 0.36 | $3.90 | 1545 | 20.2% |
+| 2 | 60 | 1.03 | $8.50 | 2116 | 21.5% |
+
+**Key insight**: Win rate ~21% but profitable due to asymmetric payoffs - winners pay more than losers cost.
 
 See [TRAINING_JOURNAL.md](TRAINING_JOURNAL.md) for full analysis.
 
