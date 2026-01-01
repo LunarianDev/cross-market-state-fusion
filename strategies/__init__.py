@@ -12,7 +12,7 @@ from .random_strat import RandomStrategy
 from .mean_revert import MeanRevertStrategy
 from .momentum import MomentumStrategy
 from .fade_spike import FadeSpikeStrategy
-from .rl_mlx import RLStrategy  # MLX-based PPO with proper autograd
+from .rl_pytorch import RLStrategy  # MLX-based PPO with proper autograd
 from .gating import GatingStrategy
 
 
