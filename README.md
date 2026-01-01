@@ -2,13 +2,21 @@
 
 RL agents that exploit information lag between fast markets (Binance futures) and slow markets (Polymarket prediction markets) through real-time multi-source state fusion.
 
-**[View the presentation (PDF)](cross-market-state-fusion.pdf)**
+**[View the presentation (PDF)](cross-market-state-fusion.pdf)** | **[LACUNA visual writeup](https://humanplane.com/lacuna)**
 
 ## What This Is
 
 A PPO (Proximal Policy Optimization) agent that paper trades Polymarket's 15-minute binary crypto markets. The agent observes live data from Binance futures and Polymarket's orderbook, then learns to predict short-term price direction.
 
 **Current status**: Paper trading only. The agent trains and makes decisions on live market data, but doesn't execute real orders.
+
+### Quick Setup Summary (Phase 5)
+- **Markets**: 4 concurrent 15-min binary crypto markets (BTC, ETH, SOL, XRP) on Polymarket
+- **Position size**: $500 per trade (scaled up from $5 in early phases)
+- **Max exposure**: $2,000 (4 markets × $500)
+- **Data sources**: Binance futures (order flow, returns) + Polymarket CLOB (orderbook)
+- **Training**: Online PPO with MLX on Apple Silicon, learns from live market data
+- **Reward**: Share-based PnL on position close (sparse signal)
 
 ## What This Proves
 
@@ -56,7 +64,9 @@ See [TRAINING_JOURNAL.md](TRAINING_JOURNAL.md) for detailed training analysis.
 | 2 (Prob-based) | $5 | 36 | 3,330 | $10.93 ($11*) | 21.2% | 1.05 (healthy) | 55% (57%*) |
 | 3 (Scaled up) | $50 | 36 | 4,133 | $23.10 ($76*) | 15.6% | 0.97 (healthy) | 12% (38%*) |
 | 4 (Share-based) | $500 | 46 | 4,873 | $3,392 | 19.0% | 1.08 (healthy) | 170% |
-| 5 (LACUNA) | $500 | - | 34,730 | ~$50K | 23.3% | 1.05 (healthy) | 2,500% |
+| 5 (LACUNA) | $500 | 10+ hrs | 34,730 | ~$50K | 23.3% | 1.05 (healthy) | 2,500% |
+
+**Phase 5 (LACUNA)**: 10+ hour paper trading session, $500 per trade, 4 concurrent markets (BTC/ETH/SOL/XRP), $2,000 max exposure.
 
 **Capital**: Position size × 4 markets = max exposure ($20 Phase 2, $200 Phase 3, $2000 Phase 4-5)
 

@@ -325,6 +325,8 @@ The switch from probability-based to share-based PnL yielded a 4.5x improvement 
 
 ### Phase 5: LACUNA (Temporal Architecture)
 
+**[Visual writeup and story →](https://humanplane.com/lacuna)**
+
 **Changes made**:
 1. Added TemporalEncoder to process last 5 states into 32-dim momentum/trend features
 2. Asymmetric actor-critic: Actor (64 hidden) vs Critic (96 hidden)
@@ -333,7 +335,7 @@ The switch from probability-based to share-based PnL yielded a 4.5x improvement 
 5. Smaller buffer (512 → 256) for faster adaptation
 6. Fixed market discovery bugs: persistent retry loop, fresh aiohttp sessions
 
-**Trades**: 34,730 | **Size**: $500
+**Duration**: 10+ hours | **Trades**: 34,730 | **Size**: $500/trade | **Mode**: Paper trading
 
 **Final**: ~$50K PnL on $2,000 max exposure = **2,500% ROI** | **Win Rate**: 23.3%
 
