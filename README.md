@@ -10,10 +10,10 @@ A PPO (Proximal Policy Optimization) agent that paper trades Polymarket's 15-min
 
 **Current status**: Paper trading only. The agent trains and makes decisions on live market data, but doesn't execute real orders.
 
-### Quick Setup Summary (Phase 5)
+### Setup
 - **Markets**: 4 concurrent 15-min binary crypto markets (BTC, ETH, SOL, XRP) on Polymarket
-- **Position size**: $500 per trade (scaled up from $5 in early phases)
-- **Max exposure**: $2,000 (4 markets × $500)
+- **Position size**: $5–$500 per trade (configurable via `--size`)
+- **Max exposure**: Position size × 4 markets
 - **Data sources**: Binance futures (order flow, returns) + Polymarket CLOB (orderbook)
 - **Training**: Online PPO with MLX on Apple Silicon, learns from live market data
 - **Reward**: Share-based PnL on position close (sparse signal)
